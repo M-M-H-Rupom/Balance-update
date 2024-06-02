@@ -18,7 +18,8 @@
     flex-direction: row;
     gap: 12px;
 }
-.balanced_field{
+.balanced_field,
+.discount_field{
     display: flex;
     flex-direction: row;
     gap: 12px;

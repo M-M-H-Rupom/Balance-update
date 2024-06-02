@@ -35,6 +35,8 @@ function user_balance_callback(){
                     <th> User Name</th>
                     <th> Balance</th>
                     <th>Update Balance </th>
+                    <th> Discount </th>
+                    <th> Update Discount </th>
                 </tr>
                 <tr>
                     <td><?php echo $current_user->ID; ?></td>
@@ -47,7 +49,12 @@ function user_balance_callback(){
                         </form> -->
 
                         <input type="number" name="user_balance" class="user_balance">
-                        <button id="update_balanced"> Update Balance</button>
+                        <button class="update_balanced"> Update Balance</button>
+                    </td>
+                    <td class='display_discount'><?php echo get_post_meta( $current_user->ID, 'discount_balance', true) ?> </td>
+                    <td class='discount_field'> 
+                        <input type="number" name="balance_discount" class="balance_discount">
+                        <button class="update_discount"> Update Discount</button>
                     </td>
                 </tr>
             </table>
@@ -58,7 +65,7 @@ function user_balance_callback(){
 }
 add_shortcode( 'user_balance', 'user_balance_callback');
 
-// ajax handle
+// ajax handle balanced update
 function balance_ajax_callback(){
     $current_user = wp_get_current_user();
     if(isset($_POST['balanced_val'])){
@@ -71,3 +78,17 @@ function balance_ajax_callback(){
     wp_send_json($current_balance);
 }
 add_action( 'wp_ajax_balance_ajax', 'balance_ajax_callback');
+
+// ajax handle discount update
+function discount_ajax_callback(){
+    $current_user = wp_get_current_user();
+    if(isset($_POST['discount_val'])){
+        $discount_value = $_POST['discount_val'];
+        if(!empty($discount_value)){
+            update_post_meta( $current_user->ID, 'discount_balance', $discount_value );
+        }
+    }
+    $current_discount = get_post_meta( $current_user->ID, 'discount_balance', true);
+    wp_send_json($current_discount);
+}
+add_action( 'wp_ajax_discount_ajax', 'discount_ajax_callback');
