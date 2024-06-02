@@ -1,0 +1,25 @@
+.main_table tr,th,td{
+   border: 1px solid sandybrown;
+   padding: 8px 16px;
+}
+.main_table table{
+   border-collapse: collapse;
+   text-align: center;
+}
+.main_table input[type='number']{
+    padding: 8px;
+}
+#update_balanced{
+    padding: 8px;
+    
+}
+.main_table form{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.balanced_field{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
